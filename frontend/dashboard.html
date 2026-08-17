@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Aarambh Luminous Learning - Admin Dashboard
+</title>
+
+
+<link rel="stylesheet" href="dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+
+<aside class="sidebar" id="sidebar">
+
+
+<div class="brand">
+
+<h2>
+Aarambh
+</h2>
+
+<p>
+Luminous Learning
+</p>
+
+</div>
+
+
+
+<ul id="menu">
+
+
+<li class="active" data-page="dashboard">
+Dashboard
+</li>
+
+
+<li data-page="leads">
+View Leads
+</li>
+
+
+<li data-page="export">
+Export Excel
+</li>
+
+
+<li data-page="csv">
+Export CSV
+</li>
+
+
+<li data-page="payments">
+Payments
+</li>
+
+
+<li data-page="delete">
+Delete Lead
+</li>
+
+
+<li data-page="settings">
+Settings
+</li>
+
+
+</ul>
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+<!-- ================= MAIN ================= -->
+
+
+<main class="main">
+
+
+
+<header>
+
+
+
+<div class="header-title">
+
+
+<h1>
+Admin Dashboard
+</h1>
+
+
+<p>
+Welcome Admin
+</p>
+
+
+</div>
+
+
+
+
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+
+<section id="dashboard" class="page active-page">
+
+
+<h2>
+Dashboard Overview
+</h2>
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+<h3>
+Total Leads
+</h3>
+
+<h2>
+48
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Qualified Leads
+</h3>
+
+<h2>
+12
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Pending Follow-up
+</h3>
+
+<h2>
+19
+</h2>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Converted Leads
+</h3>
+
+<h2>
+7
+</h2>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= VIEW LEADS ================= -->
+
+
+<section id="leads" class="page">
+
+
+<h2>
+View Leads
+</h2>
+
+
+
+<p class="page-info">
+
+All registered student leads are displayed here.
+
+</p>
+
+
+
+<div class="lead-filter-box">
+
+
+<input
+type="text"
+id="leadSearchInput"
+placeholder="Search by name, mobile, email or course">
+
+
+
+<input
+type="date"
+id="leadDateFilter">
+
+
+
+<button
+id="leadFilterBtn"
+class="primary-btn">
+
+Apply Filter
+
+</button>
+
+
+
+<button
+id="leadClearFilterBtn"
+class="secondary-btn">
+
+Clear
+
+</button>
+
+
+
+</div>
+
+
+
+<p id="leadFilterStatus" class="lead-filter-status">
+
+
+</p>
+
+
+
+<div id="leadList" class="lead-list">
+
+
+<div class="lead-card">
+
+
+<h3>
+Ananya Sharma
+</h3>
+
+
+<p>
+Email: ananya@gmail.com
+</p>
+
+
+<p>
+Course: AI for Teachers
+</p>
+
+
+<p>
+Status: Qualified
+</p>
+
+
+<button class="view-btn">
+View Details
+</button>
+
+
+
+</div>
+
+
+
+
+<div class="lead-card">
+
+
+<h3>
+Rahul Kumar
+</h3>
+
+
+<p>
+Email: rahul@gmail.com
+</p>
+
+
+<p>
+Course: Digital Marketing
+</p>
+
+
+<p>
+Status: Pending
+</p>
+
+
+<button class="view-btn">
+View Details
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- ================= EXPORT EXCEL ================= -->
+
+
+<section id="export" class="page">
+
+
+<h2>
+Export Excel
+</h2>
+
+
+
+
+<div class="box">
+
+
+<p>
+
+Export all lead information into Excel format.
+
+</p>
+
+
+
+
+<button 
+id="excelBtn"
+class="primary-btn">
+
+Download Excel
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= EXPORT CSV ================= -->
+
+
+<section id="csv" class="page">
+
+
+<h2>
+Export CSV
+</h2>
+
+
+
+
+<div class="box">
+
+
+<p>
+
+Export lead information into CSV format.
+
+</p>
+
+
+
+
+<button 
+id="csvBtn"
+class="primary-btn">
+
+Download CSV
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+<!-- ================= PAYMENTS ================= -->
+
+
+<section id="payments" class="page">
+
+
+<div class="section-header">
+
+
+<h2>
+Payments
+</h2>
+
+
+
+<label
+for="paymentFileInput"
+class="primary-btn upload-payment-btn">
+
+Upload Excel / CSV
+
+</label>
+
+<input
+type="file"
+id="paymentFileInput"
+class="file-input"
+accept=".csv,.xlsx,.xls">
+
+
+
+</div>
+
+
+
+
+<p class="page-info">
+
+Manage student payment records here.
+
+</p>
+
+
+
+
+<p id="paymentUploadStatus" class="upload-status">
+
+
+</p>
+
+
+
+
+<div class="payment-filter-box">
+
+
+<input
+type="text"
+id="paymentSearchInput"
+placeholder="Search by name or mobile number">
+
+
+
+<button
+id="paymentSearchBtn"
+class="primary-btn">
+
+Search
+
+</button>
+
+
+
+<button
+id="paymentClearSearchBtn"
+class="secondary-btn">
+
+Clear
+
+</button>
+
+
+
+</div>
+
+
+
+
+<p id="paymentSearchStatus" class="payment-search-status">
+
+
+</p>
+
+
+
+
+<div id="paymentList" class="payment-list">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= DELETE LEAD ================= -->
+
+
+<section id="delete" class="page">
+
+
+<h2>
+Delete Lead
+</h2>
+
+
+
+<p class="page-info">
+
+Select a lead and delete from the system.
+
+</p>
+
+
+
+
+<div id="deleteLeadList" class="lead-list">
+
+
+
+<div class="lead-card">
+
+
+<h3>
+Ananya Sharma
+</h3>
+
+
+
+<p>
+Email: ananya@gmail.com
+</p>
+
+
+
+<button 
+class="delete-btn">
+
+Delete Lead
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="lead-card">
+
+
+<h3>
+Rahul Kumar
+</h3>
+
+
+
+<p>
+Email: rahul@gmail.com
+</p>
+
+
+
+<button 
+class="delete-btn">
+
+Delete Lead
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= SETTINGS ================= -->
+
+
+    <!-- ================= SETTINGS ================= -->
+
+    <section id="settings" class="page">
+
+        <h2>Admin Settings</h2>
+
+        <div class="settings-box">
+
+            <h3>Reset Password</h3>
+
+            <p>Enter your email and new password.</p>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="Enter Email">
+            </div>
+
+            <div class="input-group">
+                <label>New Password</label>
+                <input
+                        type="password"
+                        id="resetNewPassword"
+                        placeholder="Enter New Password">
+            </div>
+
+            <button
+                    id="resetPasswordBtn"
+                    class="primary-btn">
+
+                Reset Password
+
+            </button>
+
+            <p id="resetMessage"></p>
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+<!-- ================= RESET PASSWORD MODAL ================= -->
+
+
+<div class="modal" id="resetModal">
+
+
+<div class="modal-content">
+
+
+<h2>
+Reset Password
+</h2>
+
+
+
+<p>
+
+Enter admin email to receive verification link.
+
+</p>
+
+
+
+
+<input 
+type="email"
+id="adminEmail"
+placeholder="Enter Admin Email">
+
+
+
+
+
+<button 
+id="sendVerificationBtn"
+class="primary-btn">
+
+Send Verification Link
+
+</button>
+
+
+
+
+
+<button 
+id="closeResetBtn"
+class="secondary-btn">
+
+Cancel
+
+</button>
+
+
+
+</div>
+
+
+</div>
+<!-- ================= VIEW LEAD MODAL ================= -->
+
+
+<div class="modal" id="viewModal">
+
+
+<div class="modal-content">
+
+
+<h2>
+Lead Details
+</h2>
+
+
+
+<div id="viewLeadDetails">
+
+
+</div>
+
+
+
+
+<button 
+id="closeViewBtn"
+class="secondary-btn">
+
+Close
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= SUCCESS MODAL ================= -->
+
+
+<div class="modal" id="successModal">
+
+
+<div class="modal-content">
+
+
+<h2>
+Success
+</h2>
+
+
+
+
+<p id="successText">
+
+
+</p>
+
+
+
+
+<button 
+id="closeSuccessBtn"
+class="primary-btn">
+
+OK
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= MOBILE MENU BUTTON ================= -->
+
+
+<button id="menuBtn">
+
+☰
+
+</button>
+
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>

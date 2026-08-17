@@ -1,0 +1,22 @@
+.DS_Store
+Thumbs.db
+
+# Java / Maven build output
+target/
+backend/target/
+
+# Local database/runtime data
+data/
+backend/data/
+*.mv.db
+*.trace.db
+
+# IDE/editor files
+.idea/
+backend/.idea/
+.vscode/
+*.iml
+
+# Logs and temp files
+*.log
+*.tmp

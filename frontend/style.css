@@ -166,10 +166,18 @@ background:#003f9e;
     border-radius: 20px;
 }
 
+.hero-image-caption {
+    margin: 14px 0 0;
+    color: #173273;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
 .floating-card {
     position: absolute;
     left: -20px;
-    bottom: 20px;
+    bottom: 54px;
     background: white;
     padding: 15px;
     display: flex;
@@ -217,10 +225,48 @@ background:#003f9e;
     margin-bottom: 15px;
 }
 
+.about .section-tag,
+.services .section-tag,
+.course-section .section-tag,
+.gallery-label,
+.testimonial-label,
+.contact-section .badge {
+    padding: 12px 28px;
+    border: 2px solid rgba(33, 84, 255, 0.18);
+    background: #dfeaff;
+    color: #173273;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    box-shadow: 0 8px 22px rgba(33, 84, 255, 0.14);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.about .section-tag:hover,
+.services .section-tag:hover,
+.course-section .section-tag:hover,
+.gallery-label:hover,
+.testimonial-label:hover,
+.contact-section .badge:hover {
+    background: #2154ff;
+    color: #ffffff;
+    box-shadow: 0 14px 34px rgba(33, 84, 255, 0.28);
+    transform: translateY(-3px) scale(1.04);
+}
+
 .section-text {
     margin: 20px auto;
     max-width: 700px;
     color: #666;
+}
+
+.about .section-text {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    text-align: justify;
+    text-align-last: center;
+    line-height: 1.85;
 }
 
 .about-grid {
@@ -254,9 +300,94 @@ background:#003f9e;
     align-items: center;
 }
 
+.choose-image {
+    position: relative;
+    border: 8px solid #8a5c36;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #3b2819;
+    box-shadow:
+        inset 0 0 0 2px rgba(255, 235, 190, 0.28),
+        0 24px 60px rgba(26, 31, 47, 0.2);
+}
+
+.choose-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.08) 56%, rgba(0, 0, 0, 0.34)),
+        radial-gradient(circle at 42% 45%, rgba(255, 255, 255, 0.12), transparent 40%);
+    pointer-events: none;
+}
+
 .choose-image img {
+    display: block;
     width: 100%;
-    border-radius: 20px;
+    min-height: 380px;
+    object-fit: cover;
+}
+
+.choose-image-text {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.26);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.26);
+    background:
+        linear-gradient(90deg, rgba(5, 32, 25, 0.78), rgba(20, 79, 58, 0.58), rgba(5, 32, 25, 0.78));
+    color: #fff8dc;
+    overflow: hidden;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.72),
+        0 0 12px rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.22),
+        inset 0 0 24px rgba(255, 255, 255, 0.08);
+}
+
+.choose-scroll-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 42px;
+    min-width: max-content;
+    white-space: nowrap;
+    animation: chooseTextScroll 20s linear infinite;
+}
+
+.choose-scroll-track span {
+    position: relative;
+    font-size: 25px;
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.choose-scroll-track span::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 248, 220, 0.82);
+    transform: translateY(-50%);
+}
+
+@keyframes chooseTextScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .choose ul {
@@ -336,12 +467,17 @@ background:#003f9e;
 .gallery-label {
   display: inline-block;
   margin-bottom: 13px;
-  padding: 5px 12px;
+  padding: 12px 28px;
+  border: 2px solid rgba(33, 84, 255, 0.18);
   border-radius: 20px;
-  color: #3768ce;
-  background-color: #e4efff;
-  font-size: 11px;
-  font-weight: 700;
+  color: #173273;
+  background-color: #dfeaff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgba(33, 84, 255, 0.14);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .gallery-heading h1 {
@@ -459,22 +595,22 @@ background:#003f9e;
 
 .publications-section{
 
-    padding:80px 24px;
+    padding:32px 24px 72px;
     background:#f8f9fd;
 
 }
 
 .publications-section .section-heading,
 .publication-grid {
-    width:min(1180px,100%);
+    width:min(1180px,calc(100% - 48px));
     margin-left:auto;
     margin-right:auto;
 }
 
 .publications-section .section-heading {
-    max-width:700px;
-    margin-bottom:55px;
+    display:block;
     text-align:center;
+    margin-bottom:55px;
 }
 
 .publications-section .section-heading h2 {
@@ -495,9 +631,9 @@ background:#003f9e;
 .publication-grid{
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
     align-items:stretch;
-    gap:30px;
+    gap:42px;
     margin-top:0;
 
 }
@@ -505,7 +641,7 @@ background:#003f9e;
 .publication-card{
 
     background:#fff;
-    border-radius:14px;
+    border-radius:8px;
     overflow:hidden;
     display:flex;
     flex-direction:column;
@@ -525,6 +661,9 @@ background:#003f9e;
     position:relative;
     padding:12px;
     overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background:#eef2f8;
 
 }
@@ -533,8 +672,9 @@ background:#003f9e;
 
     width:100%;
     height:360px;
-    border-radius:10px;
+    border-radius:8px;
     object-fit:cover;
+    object-position:center;
     transition:.4s;
 
 }
@@ -580,8 +720,11 @@ background:#003f9e;
 
 .publication-content{
 
-    padding:25px;
+    padding:16px 12px 22px;
     flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
 
 }
 
@@ -600,14 +743,19 @@ background:#003f9e;
 
 .publication-content h3{
 
-    margin:18px 0 12px;
+    margin:18px 0 10px;
+    color:#0f172a;
+    font-size:22px;
+    line-height:1.35;
 
 }
 
 .publication-content p{
 
     color:#666;
-    line-height:1.7;
+    font-size:17px;
+    line-height:1.65;
+    margin:0;
 
 }
 
@@ -669,7 +817,7 @@ background:#003f9e;
   text-align: center;
 }
 
-.section-tag {
+.course-section .section-heading .section-tag {
   display: inline-block;
   margin-bottom: 12px;
   padding: 6px 14px;
@@ -702,6 +850,31 @@ background:#003f9e;
   gap: 25px;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.course-scroll-text {
+  max-width: 900px;
+  margin: 32px auto 18px;
+  padding: 16px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(47, 97, 232, 0.18);
+  border-bottom: 1px solid rgba(47, 97, 232, 0.18);
+  background: #f7faff;
+  color: #173476;
+  border-radius: 12px;
+}
+
+.course-scroll-text .choose-scroll-track {
+  animation-duration: 34s;
+}
+
+.course-scroll-text .choose-scroll-track span {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.course-scroll-text .choose-scroll-track span::after {
+  background: rgba(47, 97, 232, 0.5);
 }
 
 .course-card {
@@ -826,7 +999,8 @@ background:#003f9e;
 }
 
 .view-button,
-.buy-button {
+.buy-button,
+.demo-consultation-button {
   min-height: 46px;
   padding: 12px 14px;
   border-radius: 7px;
@@ -847,13 +1021,24 @@ background:#003f9e;
   background-color: #3263e9;
 }
 
-.buy-button {
+.buy-button,
+.demo-consultation-button {
   border: 2px solid #3263e9;
   color: #ffffff;
   background-color: #3263e9;
 }
 
-.buy-button:hover {
+.demo-consultation-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / -1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.buy-button:hover,
+.demo-consultation-button:hover {
   border-color: #183fb7;
   background-color: #183fb7;
   transform: translateY(-2px);
@@ -1189,12 +1374,17 @@ background:#003f9e;
 .testimonial-label {
   display: inline-block;
   margin-bottom: 12px;
-  padding: 5px 13px;
+  padding: 12px 28px;
+  border: 2px solid rgba(33, 84, 255, 0.18);
   border-radius: 20px;
-  color: #2f61cf;
-  background-color: #e7f0ff;
-  font-size: 11px;
-  font-weight: 700;
+  color: #173273;
+  background-color: #dfeaff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgba(33, 84, 255, 0.14);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .testimonial-heading h2 {
@@ -1932,6 +2122,291 @@ background:#003f9e;
   color: #ffffff;
 }
 
+@media (min-width:1800px) {
+
+    html {
+        scroll-padding-top: 132px;
+    }
+
+    body {
+        font-size: 18px;
+    }
+
+    .navbar,
+    .hero,
+    .stats,
+    .about,
+    .services,
+    .choose,
+    .gallery-section,
+    .publications-section .section-heading,
+    .publication-grid,
+    .footer-container,
+    .footer-bottom,
+    .contact-wrapper {
+        max-width: 1680px;
+    }
+
+    .navbar {
+        padding: 18px 56px;
+    }
+
+    .logo {
+        font-size: 28px;
+        gap: 12px;
+    }
+
+    .logo img {
+        height: 96px;
+    }
+
+    .nav-links {
+        gap: 34px;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+    }
+
+    .book-btn {
+        padding: 13px 28px;
+    }
+
+    .btn,
+    .btn-outline {
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+
+    .hero {
+        width: min(1680px, calc(100% - 160px));
+        margin-top: 170px;
+        margin-bottom: 115px;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 95px;
+    }
+
+    .tag,
+    .section-tag,
+    .badge {
+        padding: 10px 22px;
+        font-size: 15px;
+    }
+
+    .hero h1 {
+        max-width: 760px;
+        font-size: 76px;
+    }
+
+    .hero p,
+    .section-text,
+    .choose p,
+    .title-area p {
+        font-size: 20px;
+    }
+
+    .hero-image img {
+        max-height: 650px;
+        object-fit: cover;
+    }
+
+    .floating-card {
+        left: -36px;
+        bottom: 72px;
+        padding: 22px;
+        gap: 18px;
+    }
+
+    .stats {
+        width: min(1680px, calc(100% - 160px));
+        gap: 32px;
+    }
+
+    .card,
+    .info-card,
+    .service-card {
+        padding: 44px;
+    }
+
+    .card h2 {
+        font-size: 42px;
+    }
+
+    .about,
+    .services,
+    .choose {
+        width: min(1680px, calc(100% - 160px));
+        margin-top: 120px;
+        margin-bottom: 120px;
+    }
+
+    .about h2,
+    .services h2,
+    .choose h2,
+    .gallery-heading h1,
+    .publications-section .section-heading h2,
+    .section-heading h1,
+    .testimonial-heading h2,
+    .title-area h1 {
+        font-size: 48px;
+        line-height: 1.18;
+    }
+
+    .section-text {
+        max-width: 1320px;
+    }
+
+    .about-grid,
+    .service-grid {
+        gap: 36px;
+    }
+
+    .service-card i {
+        font-size: 54px;
+    }
+
+    .gallery-page {
+        padding: 42px 56px;
+    }
+
+    .gallery-section {
+        padding: 78px 100px 104px;
+    }
+
+    .gallery-heading,
+    .section-heading,
+    .testimonial-heading {
+        max-width: 920px;
+        margin-bottom: 64px;
+    }
+
+    .gallery-heading p,
+    .publications-section .section-heading p,
+    .section-heading p,
+    .testimonial-heading p {
+        max-width: 860px;
+        font-size: 18px;
+    }
+
+    .gallery-grid {
+        max-width: 1420px;
+        gap: 24px;
+    }
+
+    .gallery-item {
+        height: 340px;
+    }
+
+    .publications-section,
+    .course-section,
+    .testimonial-section,
+    .contact-section {
+        padding: 110px 56px;
+    }
+
+    .publication-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 56px;
+    }
+
+    .publication-image img {
+        height: 470px;
+    }
+
+    .publication-content {
+        padding: 26px 24px 34px;
+    }
+
+    .publication-content h3 {
+        font-size: 28px;
+    }
+
+    .publication-content p,
+    .course-short-description,
+    .course-features li,
+    .modal-description {
+        font-size: 18px;
+    }
+
+    .course-container {
+        grid-template-columns: repeat(2, minmax(420px, 560px));
+        max-width: 1240px;
+        gap: 40px;
+    }
+
+    .course-scroll-text {
+        max-width: 1240px;
+    }
+
+    .course-card {
+        min-height: 680px;
+        padding: 44px;
+    }
+
+    .course-card h2 {
+        font-size: 30px;
+    }
+
+    .payment-wrapper {
+        max-width: 1220px;
+    }
+
+    .order-summary,
+    .payment-form-section,
+    .course-modal {
+        padding: 56px;
+    }
+
+    .testimonial-slider {
+        max-width: 1280px;
+    }
+
+    .testimonial-card {
+        width: min(100%, 860px);
+        min-height: 390px;
+        padding: 56px 84px;
+    }
+
+    .review-text {
+        max-width: 700px;
+        font-size: 20px;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 520px 1fr;
+        gap: 56px;
+    }
+
+    .contact-card,
+    .form-card {
+        padding: 48px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 17px 18px;
+        font-size: 17px;
+    }
+
+    .submit-btn,
+    .pay-button,
+    .modal-buy-button,
+    .view-button,
+    .buy-button {
+        min-height: 54px;
+        font-size: 17px;
+    }
+
+    .site-footer {
+        padding: 72px 56px 28px;
+    }
+
+    .footer-container {
+        gap: 80px;
+    }
+}
+
 
 @media(max-width:900px) {
 
@@ -2020,7 +2495,7 @@ background:#003f9e;
     .floating-card {
         left: 16px;
         right: 16px;
-        bottom: 16px;
+        bottom: 52px;
         max-width: calc(100% - 32px);
     }
 
@@ -2044,8 +2519,8 @@ background:#003f9e;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .publication-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    .publication-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .gallery-item {
@@ -2138,7 +2613,7 @@ background:#003f9e;
         right:18px;
         bottom:18px;
     }
-  
+
    .site-footer {
     padding: 40px 20px 20px;
   }
@@ -2175,6 +2650,32 @@ background:#003f9e;
 
     .hero h1 {
         font-size: 32px;
+    }
+
+    .choose-image img {
+        min-height: 310px;
+    }
+
+    .choose-image-text {
+        left: 5%;
+        right: 5%;
+        padding: 14px 0;
+    }
+
+    .choose-scroll-track {
+        gap: 30px;
+        animation-duration: 18s;
+    }
+
+    .choose-scroll-track span {
+        font-size: 17px;
+        line-height: 1.45;
+    }
+
+    .choose-scroll-track span::after {
+        right: -19px;
+        width: 6px;
+        height: 6px;
     }
 
     .navbar {
@@ -2218,6 +2719,7 @@ background:#003f9e;
     .testimonial-section,
     .contact-section {
         padding-top: 52px;
+        padding-bottom: 52px;
         padding-left: 16px;
         padding-right: 16px;
     }
@@ -2231,13 +2733,21 @@ background:#003f9e;
         grid-template-columns: 1fr;
     }
 
-    .gallery-item,
-    .publication-image img {
+    .publication-card {
+        max-width: 100%;
+    }
+
+    .gallery-item {
         height: 240px;
     }
 
     .publication-image {
+        min-height: 310px;
         padding: 10px;
+    }
+
+    .publication-image img {
+        height: 290px;
     }
 
     .publication-content {

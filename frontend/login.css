@@ -1,0 +1,507 @@
+/* =====================================
+   AARAMBH LUMINOUS LEARNING
+   ADMIN LOGIN CSS
+===================================== */
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #240046,
+        #7b2cbf,
+        #c77dff
+    );
+
+}
+
+
+/* HOME NAVIGATION */
+
+.home-nav-btn{
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#5a189a;
+
+    text-decoration:none;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    box-shadow:
+    0 8px 20px rgba(90,24,154,0.16);
+
+    transition:0.3s;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.home-nav-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#f7efff;
+
+}
+
+
+
+/* MAIN CONTAINER */
+
+.login-container{
+
+    width:100%;
+
+    padding:20px;
+
+}
+
+
+
+/* LOGIN CARD */
+
+.login-box{
+
+    width:100%;
+
+    max-width:430px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:22px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.25);
+
+}
+
+
+
+/* LOGO */
+
+.logo-section{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.logo-section h1{
+
+    font-size:40px;
+
+    color:#5a189a;
+
+    font-weight:700;
+
+}
+
+
+
+.logo-section p{
+
+    color:#777;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+/* HEADING */
+
+
+.login-box h2{
+
+    text-align:center;
+
+    color:#333;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.login-text{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:30px;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+/* INPUT */
+
+.input-group{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#444;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+
+.input-group input{
+
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+}
+
+
+
+.input-group input:focus{
+
+
+    border-color:#7b2cbf;
+
+    box-shadow:
+    0 0 10px rgba(123,44,191,0.25);
+
+}
+
+
+
+
+
+
+/* ERROR MESSAGE */
+
+#errorMessage{
+
+    text-align:center;
+
+    color:red;
+
+    font-size:14px;
+
+    min-height:20px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
+
+
+/* LOGIN BUTTON */
+
+
+.login-btn{
+
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #5a189a,
+        #9d4edd
+    );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.login-btn:hover{
+
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 25px rgba(90,24,154,0.35);
+
+
+}
+
+
+
+
+
+
+
+/* RESET PASSWORD */
+
+
+.reset-password{
+
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:#5a189a;
+
+    font-size:14px;
+
+
+}
+
+
+
+.reset-password:hover{
+
+    text-decoration:underline;
+
+}
+
+
+@media(min-width:1800px){
+
+    body{
+
+        font-size:18px;
+
+    }
+
+
+
+    .login-container{
+
+        padding:48px;
+
+    }
+
+
+
+    .login-box{
+
+        max-width:560px;
+
+        padding:56px;
+
+        border-radius:26px;
+
+    }
+
+
+
+    .home-nav-btn{
+
+        width:54px;
+
+        height:54px;
+
+        font-size:34px;
+
+        margin-bottom:18px;
+
+    }
+
+
+
+    .logo-section{
+
+        margin-bottom:34px;
+
+    }
+
+
+
+    .logo-section h1{
+
+        font-size:52px;
+
+    }
+
+
+
+    .logo-section p,
+    .login-text,
+    .input-group label,
+    #errorMessage,
+    .reset-password{
+
+        font-size:17px;
+
+    }
+
+
+
+    .login-box h2{
+
+        font-size:30px;
+
+    }
+
+
+
+    .login-text{
+
+        margin-bottom:38px;
+
+    }
+
+
+
+    .input-group{
+
+        margin-bottom:26px;
+
+    }
+
+
+
+    .input-group input{
+
+        padding:18px;
+
+        font-size:18px;
+
+    }
+
+
+
+    .login-btn{
+
+        padding:18px;
+
+        font-size:19px;
+
+    }
+
+}
+
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+
+.home-nav-btn{
+
+    width:40px;
+
+    height:40px;
+
+    font-size:25px;
+
+}
+
+
+.login-box{
+
+    padding:30px 20px;
+
+}
+
+
+.logo-section h1{
+
+    font-size:32px;
+
+}
+
+
+}

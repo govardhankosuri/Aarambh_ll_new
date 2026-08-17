@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Payment Details - Aarambh Luminous Learning
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    >
+
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <a href="index.html">
+
+                <img
+                        src="logo.jpg"
+                        alt="Aarambh Luminous Learning Logo"
+                >
+
+            </a>
+
+            <p>
+                AARAMBH <br>
+                Luminous Learning
+            </p>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html#index">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#plans">
+                    Course-plans
+                </a>
+            </li>
+
+            <li>
+                <a href="index.html#contact">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+        <button
+                class="menu-btn"
+                type="button"
+                aria-label="Open navigation menu"
+        >
+            <i class="fa fa-bars"></i>
+        </button>
+
+    </nav>
+
+</header>
+
+
+<main class="payment-page">
+
+    <div class="payment-wrapper">
+
+        <section class="order-summary">
+
+            <h1>
+                Order Summary
+            </h1>
+
+            <p class="order-summary-description">
+
+                Review the selected course information before
+                entering your payment details.
+
+            </p>
+
+            <div class="order-course-box">
+
+                <p class="order-label">
+                    Selected course
+                </p>
+
+                <h2 id="selectedCourseName">
+                    Course Name
+                </h2>
+
+                <div class="order-price-row">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong id="selectedCoursePrice">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <a
+                    href="index.html#plans"
+                    class="back-link"
+            >
+                ← Back to Course-plans
+            </a>
+
+        </section>
+
+
+        <section class="payment-form-section">
+
+            <h2>
+                Payment Details
+            </h2>
+
+            <p class="payment-form-description">
+
+                Enter your personal details to continue.
+                Secure payment will be completed through Razorpay.
+
+            </p>
+
+            <form
+                    class="payment-form"
+                    id="paymentForm"
+            >
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email address"
+                            required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            maxlength="10"
+                            required
+                    >
+
+                </div>
+
+
+                <button
+                        type="submit"
+                        class="pay-button"
+                        id="payButton"
+                >
+                    Pay Now
+                </button>
+
+
+                <p
+                        class="payment-message"
+                        id="paymentMessage"
+                ></p>
+
+            </form>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- Razorpay Checkout Library -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+<script>
+
+    // =====================================================
+    // COURSE DETAILS
+    // =====================================================
+
+    const urlParameters =
+        new URLSearchParams(window.location.search);
+
+    const courseName =
+        urlParameters.get("course") || "Selected Course";
+
+    const coursePrice =
+        urlParameters.get("price") || "0";
+
+    const USE_LOCAL_BACKEND =
+        window.location.protocol === "file:" ||
+        ["5500", "5173", "3000"].includes(window.location.port);
+    const API_BASE_URL =
+        USE_LOCAL_BACKEND
+            ? "http://localhost:8080/api"
+            : "/api";
+
+
+    // =====================================================
+    // PAGE ELEMENTS
+    // =====================================================
+
+    const selectedCourseName =
+        document.getElementById("selectedCourseName");
+
+    const selectedCoursePrice =
+        document.getElementById("selectedCoursePrice");
+
+    const paymentForm =
+        document.getElementById("paymentForm");
+
+    const payButton =
+        document.getElementById("payButton");
+
+    const paymentMessage =
+        document.getElementById("paymentMessage");
+
+    const fullNameInput =
+        document.getElementById("fullName");
+
+    const emailInput =
+        document.getElementById("email");
+
+    const phoneInput =
+        document.getElementById("phone");
+
+    // =====================================================
+    // DISPLAY COURSE AND PRICE
+    // =====================================================
+
+    function formatPrice(price) {
+
+        const amount =
+            Number(price || 0);
+
+        return "₹" +
+            amount.toLocaleString("en-IN");
+    }
+
+
+    selectedCourseName.textContent =
+        courseName;
+
+    selectedCoursePrice.textContent =
+        formatPrice(coursePrice);
+
+    payButton.textContent =
+        "Pay " + formatPrice(coursePrice);
+
+
+    // =====================================================
+    // FIELD FORMATTING
+    // =====================================================
+
+
+    phoneInput.addEventListener(
+        "input",
+        function () {
+
+            phoneInput.value =
+                phoneInput.value
+                    .replace(/\D/g, "")
+                    .substring(0, 10);
+        }
+    );
+
+
+    // =====================================================
+    // PAYMENT SUBMIT
+    // =====================================================
+
+    paymentForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            clearPaymentMessage();
+
+
+            const fullName =
+                fullNameInput.value.trim();
+
+            const email =
+                emailInput.value.trim();
+
+            const phone =
+                phoneInput.value.trim();
+
+            const amount =
+                Number(coursePrice);
+
+
+            // =================================================
+            // VALIDATION
+            // =================================================
+
+            if (fullName === "") {
+
+                showPaymentError(
+                    "Please enter your full name."
+                );
+
+                fullNameInput.focus();
+
+                return;
+            }
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+
+                showPaymentError(
+                    "Please enter a valid email address."
+                );
+
+                emailInput.focus();
+
+                return;
+            }
+
+
+            const phonePattern =
+                /^[6-9][0-9]{9}$/;
+
+            if (!phonePattern.test(phone)) {
+
+                showPaymentError(
+                    "Please enter a valid 10-digit Indian mobile number."
+                );
+
+                phoneInput.focus();
+
+                return;
+            }
+
+
+            if (
+                Number.isNaN(amount) ||
+                amount <= 0
+            ) {
+
+                showPaymentError(
+                    "Invalid course amount."
+                );
+
+                return;
+            }
+
+
+            if (typeof Razorpay === "undefined") {
+
+                showPaymentError(
+                    "Razorpay Checkout could not load. Check your internet connection."
+                );
+
+                return;
+            }
+
+
+            const originalButtonText =
+                payButton.textContent;
+
+
+            payButton.disabled = true;
+
+            payButton.textContent =
+                "Creating Order...";
+
+
+            try {
+
+                // =============================================
+                // CREATE RAZORPAY ORDER FROM BACKEND
+                // =============================================
+
+                const orderResponse =
+                    await fetch(
+                        API_BASE_URL + "/payments/create-order",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                fullName: fullName,
+
+                                email: email,
+
+                                phone: phone,
+
+                                courseName: courseName,
+
+                                amount: amount
+                            })
+                        }
+                    );
+
+
+                const orderData =
+                    await readResponse(orderResponse);
+
+
+                if (!orderResponse.ok) {
+
+                    throw new Error(
+                        orderData.message ||
+                        orderData.error ||
+                        "Unable to create payment order."
+                    );
+                }
+
+
+                const razorpayContact =
+                    formatRazorpayContact(
+                        orderData.phone || phone
+                    );
+
+
+                // =============================================
+                // RAZORPAY CHECKOUT
+                // =============================================
+
+                const razorpayOptions = {
+
+                    key:
+                        orderData.razorpayKeyId,
+
+                    amount:
+                        orderData.amountInPaise,
+
+                    currency:
+                        orderData.currency,
+
+                    name:
+                        orderData.companyName,
+
+                    description:
+                        orderData.courseName,
+
+                    order_id:
+                        orderData.razorpayOrderId,
+
+
+                    handler:
+                        async function (
+                            razorpayResponse
+                        ) {
+
+                            await verifyPayment(
+                                razorpayResponse,
+                                orderData
+                            );
+                        },
+
+
+                    prefill: {
+
+                        name:
+                            orderData.fullName,
+
+                        email:
+                        orderData.email,
+
+                        contact:
+                            razorpayContact
+                    },
+
+
+                    readonly: {
+
+                        email:
+                            true,
+
+                        contact:
+                            true
+                    },
+
+
+                    notes: {
+
+                        course_name:
+                            orderData.courseName,
+
+                        payment_record_id:
+                            String(
+                                orderData.paymentRecordId
+                            )
+                    },
+
+
+                    theme: {
+
+                        color:
+                            "#2f61e8"
+                    },
+
+
+                    modal: {
+
+                        ondismiss:
+                            function () {
+
+                                showPaymentError(
+                                    "Payment window was closed."
+                                );
+
+                                resetPaymentButton(
+                                    originalButtonText
+                                );
+                            }
+                    }
+                };
+
+
+                const razorpayCheckout =
+                    new Razorpay(razorpayOptions);
+
+
+                razorpayCheckout.on(
+                    "payment.failed",
+                    function (failureResponse) {
+
+                        const description =
+                            failureResponse.error &&
+                            failureResponse.error.description
+                                ? failureResponse.error.description
+                                : "Payment failed. Please try again.";
+
+
+                        showPaymentError(description);
+
+
+                        resetPaymentButton(
+                            originalButtonText
+                        );
+                    }
+                );
+
+
+                razorpayCheckout.open();
+
+
+                payButton.textContent =
+                    "Complete Payment";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Payment order error:",
+                    error
+                );
+
+
+                showPaymentError(
+                    error.message ||
+                    "Unable to start payment."
+                );
+
+
+                resetPaymentButton(
+                    originalButtonText
+                );
+            }
+        }
+    );
+
+
+    // =====================================================
+    // VERIFY RAZORPAY PAYMENT
+    // =====================================================
+
+    async function verifyPayment(
+        razorpayResponse,
+        orderData
+    ) {
+
+        payButton.disabled = true;
+
+        payButton.textContent =
+            "Verifying Payment...";
+
+
+        try {
+
+            const verificationResponse =
+                await fetch(
+                    API_BASE_URL + "/payments/verify",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            razorpayOrderId:
+                                razorpayResponse
+                                    .razorpay_order_id,
+
+                            razorpayPaymentId:
+                                razorpayResponse
+                                    .razorpay_payment_id,
+
+                            razorpaySignature:
+                                razorpayResponse
+                                    .razorpay_signature
+                        })
+                    }
+                );
+
+
+            const verificationData =
+                await readResponse(
+                    verificationResponse
+                );
+
+
+            if (
+                !verificationResponse.ok ||
+                !verificationData.verified
+            ) {
+
+                throw new Error(
+                    verificationData.message ||
+                    "Payment verification failed."
+                );
+            }
+
+
+            paymentMessage.style.color =
+                "#159652";
+
+            paymentMessage.textContent =
+                "Payment completed and verified successfully. Payment ID: " +
+                verificationData.razorpayPaymentId;
+
+
+            alert(
+                "Payment Successful!\n\n" +
+                "Course: " +
+                orderData.courseName +
+                "\n" +
+                "Amount: " +
+                formatPrice(orderData.amount) +
+                "\n" +
+                "Payment ID: " +
+                verificationData.razorpayPaymentId
+            );
+
+
+            paymentForm.reset();
+
+
+            payButton.disabled = true;
+
+            payButton.textContent =
+                "Payment Completed";
+
+
+        } catch (error) {
+
+            console.error(
+                "Payment verification error:",
+                error
+            );
+
+
+            showPaymentError(
+                error.message ||
+                "Payment was made, but verification failed. Please contact support."
+            );
+
+
+            payButton.disabled = false;
+
+            payButton.textContent =
+                "Retry Payment";
+        }
+    }
+
+
+    // =====================================================
+    // RESPONSE READER
+    // =====================================================
+
+    function formatRazorpayContact(phoneValue) {
+
+        const digits =
+            String(phoneValue || "")
+                .replace(/\D/g, "");
+
+        const tenDigitPhone =
+            digits.length > 10
+                ? digits.slice(-10)
+                : digits;
+
+        return "+91" + tenDigitPhone;
+    }
+
+
+    // =====================================================
+    // RESPONSE READER
+    // =====================================================
+
+    async function readResponse(response) {
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if (
+            contentType.includes(
+                "application/json"
+            )
+        ) {
+
+            return await response.json();
+        }
+
+
+        const text =
+            await response.text();
+
+
+        return {
+            message: text
+        };
+    }
+
+
+    // =====================================================
+    // MESSAGE HELPERS
+    // =====================================================
+
+    function clearPaymentMessage() {
+
+        paymentMessage.textContent = "";
+    }
+
+
+    function showPaymentError(message) {
+
+        paymentMessage.style.color =
+            "#dc2626";
+
+        paymentMessage.textContent =
+            message;
+    }
+
+
+    function resetPaymentButton(
+        buttonText
+    ) {
+
+        payButton.disabled = false;
+
+        payButton.textContent =
+            buttonText;
+    }
+
+
+    // =====================================================
+    // MOBILE MENU
+    // =====================================================
+
+    const menu =
+        document.querySelector(".menu-btn");
+
+    const nav =
+        document.querySelector(".nav-links");
+
+
+    if (menu && nav) {
+
+        menu.addEventListener(
+            "click",
+            function () {
+
+                nav.classList.toggle("active");
+            }
+        );
+
+
+        nav
+            .querySelectorAll("a")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        nav.classList.remove(
+                            "active"
+                        );
+                    }
+                );
+            });
+    }
+
+</script>
+
+</body>
+
+</html>
